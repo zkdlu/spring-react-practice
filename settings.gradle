@@ -1,4 +1,4 @@
 rootProject.name = 'application-continuum-boilerplate'
 
-include ':applications:application-demo', ':components:module-demo'
+include ':applications:app-cloud-service-discovery', ':components:module-cloud-service-discovery'
 

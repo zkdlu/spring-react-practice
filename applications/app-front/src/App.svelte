@@ -1,9 +1,12 @@
 <script>
-	export let name;
+	import Router from "svelte-spa-router";
+	import Header from "./components/Header.svelte";
+	import routes from "./routes";
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
+	<Header />
+	<Router {routes} />
 </main>
 
 <style>

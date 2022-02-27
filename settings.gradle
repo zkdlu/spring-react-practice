@@ -1,4 +1,5 @@
 rootProject.name = 'application-continuum-boilerplate'
 
 include ':applications:app-cloud-service-discovery', ':components:module-cloud-service-discovery'
+include ':applications:app-cloud-service-demo', ':components:module-cloud-service-demo'
 

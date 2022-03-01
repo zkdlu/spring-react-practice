@@ -6,7 +6,7 @@
 
     async function fetchServices() {
         let fetchedServices = [];
-        const json = await api.get("http://localhost:8761/services");
+        const json = await api.get("services");
 
         fetchedServices.push(...json);
 

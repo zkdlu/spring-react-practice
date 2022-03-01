@@ -1,10 +1,11 @@
+const serverUrl = "http://localhost:8080";
 const api = {
     get: async (url) => {
-        const response = await fetch(`${url}`);
+        const response = await fetch(`${serverUrl}/${url}`);
         return response.json();
     },
     post: async (url, body) => {
-        const response = await fetch(`${url}`, {
+        const response = await fetch(`${serverUrl}/${url}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",  

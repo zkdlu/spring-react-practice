@@ -8,9 +8,7 @@
 
     async function fetchInstance() {
         let fetchedInstances = [];
-        const json = await api.get(
-            `http://localhost:8761/services/${params.id}`
-        );
+        const json = await api.get(`services/${params.id}`);
 
         fetchedInstances.push(...json);
 

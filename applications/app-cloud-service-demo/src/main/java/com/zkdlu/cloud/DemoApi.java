@@ -1,4 +1,4 @@
-package com.zkdlu.cloud.demo;
+package com.zkdlu.cloud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.client.discovery.DiscoveryClient;

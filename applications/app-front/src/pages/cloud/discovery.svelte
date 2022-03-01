@@ -19,12 +19,13 @@
 </script>
 
 
-    <ul>
-        {#each services as serviceName}
-            <li> {serviceName} </li>
-        {/each}
-    </ul>
+{#each services as serviceName}
+    <a class="tile" href="#/discovery/{serviceName}">{serviceName}</a>
+{/each}
 
 <style>
-   
+   	.tile {
+        width: 200px;
+        height: 100px;
+    }
 </style>

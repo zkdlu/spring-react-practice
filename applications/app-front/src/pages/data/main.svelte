@@ -4,9 +4,9 @@
 </script>
 
 <div class="container">
-    <a class="tile" href="/jpa" use:link use:active> JPA </a>
-    <a class="tile" href="/jpa" use:link use:active> Redis </a>
-    <a class="tile" href="/jpa" use:link use:active> MongoDB </a>
+    <a class="tile" href="/data/jpa" use:link use:active> JPA </a>
+    <a class="tile" href="/data/redis" use:link use:active> Redis </a>
+    <a class="tile" href="/data/mongodb" use:link use:active> MongoDB </a>
 </div>
 
 <style>

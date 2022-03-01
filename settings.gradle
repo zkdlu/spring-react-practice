@@ -3,4 +3,5 @@ rootProject.name = 'spring-ecosystem'
 include ':applications:app-back'
 include ':applications:app-cloud-service-demo'
 include ':components:module-cloud-service-discovery'
+include ':components:module-data-jpa'
 

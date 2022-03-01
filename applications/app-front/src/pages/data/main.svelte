@@ -3,8 +3,11 @@
     import active from "svelte-spa-router/active";
 </script>
 
-<a class="tile" href="/jpa" use:link use:active> JPA </a>
+<div class="container">
+    <a class="tile" href="/jpa" use:link use:active> JPA </a>
+    <a class="tile" href="/jpa" use:link use:active> Redis </a>
+    <a class="tile" href="/jpa" use:link use:active> MongoDB </a>
+</div>
 
 <style>
-
 </style>

@@ -1,3 +1,4 @@
 dependencies {
     implementation project(':components:module-cloud-service-discovery')
+    implementation project(':components:module-data-jpa')
 }

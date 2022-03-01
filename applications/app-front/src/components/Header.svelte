@@ -1,16 +1,12 @@
 <script>
-    import { link } from "svelte-spa-router";
-    import active from "svelte-spa-router/active";
 </script>
 
 <header>
-    <a href="/" use:link use:active> Home </a>
-    <a href="/cloud" use:link use:active> Cloud </a>
+    <h1><a href="/">Spring Ecosystem</a></h1>
 </header>
 
 <style>
     :global(header a.active) {
-        font-weight: bold;
-        text-decoration: underline;
+        text-decoration: none;
     }
 </style>

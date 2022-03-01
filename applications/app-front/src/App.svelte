@@ -10,4 +10,17 @@
 </main>
 
 <style>
+	:global(.tile) {
+        border: 1px solid black;
+        background-color:cornsilk;
+        width: 100px;
+        height: 100px;
+        text-align: center;
+        display: block;
+    }
+    
+    :global(.tile:hover) {
+        border: 2px solid black;
+        background-color:bisque;
+    }
 </style>

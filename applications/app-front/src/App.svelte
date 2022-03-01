@@ -23,4 +23,10 @@
         border: 2px solid black;
         background-color:bisque;
     }
+
+    :global(.container) {
+        display: grid;
+        grid-template-columns: 120px 120px 120px;
+        grid-template-rows: 120px 120px 120px;
+    }
 </style>

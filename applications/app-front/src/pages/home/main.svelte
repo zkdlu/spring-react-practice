@@ -1,8 +1,24 @@
+
 <script>
+    
+    import { onMount } from "svelte";
+
     import { link } from "svelte-spa-router";
     import active from "svelte-spa-router/active";
-</script>
 
+
+    onMount(() => {
+        const socket = new WebSocket("ws://localhost:8080/ws-stomp");
+        socket.onopen = () => {
+            console.log("Opened");
+            socket.send('hihi');
+        };
+        socket.onmessage = (message) => {
+            console.log(message);
+        };
+    
+    });
+</script>
 <div class="container">
     <a class="tile" href="/cloud" use:link use:active> Cloud </a>
     <a class="tile" href="/data" use:link use:active> Data </a>
@@ -15,5 +31,4 @@
 </div>
 
 <style>
-   
 </style>

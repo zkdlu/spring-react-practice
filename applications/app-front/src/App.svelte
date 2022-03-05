@@ -6,27 +6,15 @@
 
 <main>
 	<Header />
-	<Router {routes} />
+	<div class="container">
+		<Router {routes} />
+	</div>
 </main>
 
 <style>
-	:global(.tile) {
-        border: 1px solid black;
-        background-color:cornsilk;
-        width: 100px;
-        height: 100px;
-        text-align: center;
-        display: block;
-    }
-    
-    :global(.tile:hover) {
-        border: 2px solid black;
-        background-color:bisque;
-    }
-
-    :global(.container) {
-        display: grid;
-        grid-template-columns: 120px 120px 120px;
-        grid-template-rows: 120px 120px 120px;
-    }
+	:global(.container) {
+		display: grid;
+		grid-template-columns: 120px 120px 120px;
+		grid-template-rows: 120px 120px 120px;
+	}
 </style>

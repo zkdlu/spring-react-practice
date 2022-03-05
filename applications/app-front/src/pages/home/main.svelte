@@ -1,34 +1,47 @@
-
 <script>
-    
     import { onMount } from "svelte";
 
     import { link } from "svelte-spa-router";
     import active from "svelte-spa-router/active";
 
-
     onMount(() => {
         const socket = new WebSocket("ws://localhost:8080/ws-stomp");
         socket.onopen = () => {
             console.log("Opened");
-            socket.send('hihi');
+            socket.send("hihi");
         };
         socket.onmessage = (message) => {
             console.log(message);
         };
-    
+    });
+
+    import api from "../../api";
+
+    let services = [];
+
+    async function fetchServices() {
+        let fetchedServices = [];
+        const json = await api.get("services");
+
+        fetchedServices.push(...json);
+
+        services = fetchedServices;
+    }
+
+    onMount(async () => {
+        await fetchServices();
     });
 </script>
-<div class="container">
-    <a class="tile" href="/cloud" use:link use:active> Cloud </a>
-    <a class="tile" href="/data" use:link use:active> Data </a>
 
-    <a class="tile" href="/web" use:link use:active> Web </a>
-    <a class="tile" href="/security" use:link use:active> Security </a>
-    <a class="tile" href="/reactive" use:link use:active> Reactive </a>
-    <a class="tile" href="/batch" use:link use:active> Batch </a>
-    <a class="tile" href="/messaging" use:link use:active> Messaging </a>
+<div class="container">
+    {#each services as serviceName}
+        <a class="tile" href="#/discovery/{serviceName}">{serviceName}</a>
+    {/each}
 </div>
 
 <style>
+    .tile {
+        width: 200px;
+        height: 100px;
+    }
 </style>

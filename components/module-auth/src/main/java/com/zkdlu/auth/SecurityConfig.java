@@ -21,11 +21,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                     .authorizeRequests()
+                    .antMatchers("/test").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .oauth2Login()
-                .successHandler(successHandler)
-                .userInfoEndpoint().userService(customOAuth2UserService);
+                    .successHandler(successHandler)
+                    .userInfoEndpoint().userService(customOAuth2UserService);
 
     }
 }

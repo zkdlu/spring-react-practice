@@ -2,16 +2,21 @@
     import { onMount } from "svelte";
 
     let socket;
-    let myMessage = '';
+    let myMessage = "";
     $: messages = [];
-    
+
     function sendMessage() {
-        socket.send(myMessage);
-        myMessage = '';
+        socket.send(JSON.stringify({
+            type: "TALK",
+            sender: "Lee",
+            data: myMessage,
+        }));
+
+        myMessage = "";
     }
 
     function handleEnter(event) {
-        if (event.key === 'Enter') {
+        if (event.key === "Enter") {
             sendMessage();
         }
     }
@@ -20,10 +25,18 @@
         socket = new WebSocket("ws://localhost:8080/ws-stomp");
         socket.onopen = () => {
             console.log("Opened");
+            socket.send(JSON.stringify({
+                type: "ENTER",
+                sender: "Lee",
+                data: '',
+            }));
         };
         socket.onmessage = (payload) => {
-            console.log(payload);
-            messages = [...messages, payload.data];
+            const message = payload.data;
+            const json = JSON.parse(message);
+
+            console.log(json);
+            messages = [...messages, json];
         };
     });
 </script>
@@ -31,15 +44,19 @@
 <div class="chat">
     <ul>
         {#each messages as message}
-        <li>{message}</li>
+            <li>{message.sender} - {message.data}</li>
         {/each}
     </ul>
 </div>
 <div>
-    <input type="text" placeholder="message" bind:value="{myMessage}" on:keypress="{handleEnter}"/>
-    <button on:click="{sendMessage}">send</button>
+    <input
+        type="text"
+        placeholder="message"
+        bind:value={myMessage}
+        on:keypress={handleEnter}
+    />
+    <button on:click={sendMessage}>send</button>
 </div>
-
 
 <style>
     .chat {

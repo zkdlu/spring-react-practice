@@ -1,12 +1,14 @@
 package com.zkdlu.auth;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsUtils;
 
 @RequiredArgsConstructor
 @Configuration
@@ -23,12 +25,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                     .authorizeRequests()
-                    .anyRequest().authenticated()
+                    .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+                    .antMatchers("/api/**").authenticated()
+                    .anyRequest().permitAll()
                 .and()
                     .oauth2Login()
-                    .successHandler(successHandler)
-                    .userInfoEndpoint().userService(customOAuth2UserService);
+                    .authorizationEndpoint()
+                    .authorizationRequestRepository(getAuthorizationRequestRepository())
+                .and()
+                    .userInfoEndpoint().userService(customOAuth2UserService)
+                .and()
+                    .successHandler(successHandler);
 
         http.addFilterBefore(new JwtAuthFilter(tokenService), UsernamePasswordAuthenticationFilter.class);
+    }
+
+    @Bean
+    public OAuth2AuthorizationRequestBasedOnCookieRepository getAuthorizationRequestRepository() {
+        return new OAuth2AuthorizationRequestBasedOnCookieRepository();
     }
 }

@@ -45,13 +45,26 @@ public class CustomTokenService {
     }
 
     public boolean verifyToken(String token) {
-        Claims claims = Jwts.parserBuilder()
+        try {
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(getSigninKey())
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+
+            return claims.getExpiration().after(new Date());
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public String getEmail(String token) {
+        return Jwts.parserBuilder()
                 .setSigningKey(getSigninKey())
                 .build()
                 .parseClaimsJws(token)
-                .getBody();
-
-        return claims.getExpiration().after(new Date());
+                .getBody()
+                .getSubject();
     }
 
     private Key getSigninKey() {

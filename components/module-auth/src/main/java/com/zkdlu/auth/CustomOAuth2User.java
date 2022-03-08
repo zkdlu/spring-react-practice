@@ -3,8 +3,6 @@ package com.zkdlu.auth;
 import lombok.Getter;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import java.util.Map;
-
 @Getter
 public class CustomOAuth2User {
     private String email;
@@ -22,7 +20,7 @@ public class CustomOAuth2User {
 
         return new CustomOAuth2User(
                 (String)attributes.get("email"),
-                (String)attributes.get("email"),
-                (String)attributes.get("email"));
+                (String)attributes.get("name"),
+                (String)attributes.get("thumbnail"));
     }
 }

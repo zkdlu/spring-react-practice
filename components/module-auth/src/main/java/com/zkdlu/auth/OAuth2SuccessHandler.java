@@ -1,10 +1,8 @@
 package com.zkdlu.auth;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
+import static com.zkdlu.auth.OAuth2AuthorizationRequestBasedOnCookieRepository.AUTH_TOKEN;
 import static com.zkdlu.auth.OAuth2AuthorizationRequestBasedOnCookieRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
 import static com.zkdlu.auth.OAuth2AuthorizationRequestBasedOnCookieRepository.REFRESH_TOKEN;
 
@@ -35,7 +34,8 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         CustomToken token = tokenService.allocateToken(customOAuth2User);
 
         CookieUtil.deleteCookie(request, response, REFRESH_TOKEN);
-        CookieUtil.addCookie(response, REFRESH_TOKEN, token.getAuth(), 3600);
+        CookieUtil.addCookie(response, AUTH_TOKEN, token.getAuth(), 3600);
+        CookieUtil.addCookie(response, REFRESH_TOKEN, token.getRefresh(), 3600);
 
         getRedirectStrategy().sendRedirect(request, response, targetUrl);
     }

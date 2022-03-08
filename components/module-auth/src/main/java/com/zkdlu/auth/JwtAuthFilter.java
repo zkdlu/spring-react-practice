@@ -11,9 +11,12 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
+
+import static com.zkdlu.auth.OAuth2AuthorizationRequestBasedOnCookieRepository.AUTH_TOKEN;
 
 
 @RequiredArgsConstructor
@@ -22,9 +25,10 @@ public class JwtAuthFilter extends GenericFilterBean {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        String token = ((HttpServletRequest)request).getHeader("AUTH");
+        Cookie token = CookieUtil.getCookie((HttpServletRequest) request, AUTH_TOKEN)
+                .orElse(null);
 
-        if (null != token && tokenService.verifyToken(token)) {
+        if (null != token && tokenService.verifyToken(token.getValue())) {
             Authentication authentication = new UsernamePasswordAuthenticationToken("test", "", List.of(new SimpleGrantedAuthority("ROLE_USER")));
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }

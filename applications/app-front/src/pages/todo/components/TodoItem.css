@@ -34,7 +34,7 @@
     word-break: break-all;
   }
   
-  .checked {
+  .complete {
     text-decoration: line-through;
     color: #adb5bd;
   }

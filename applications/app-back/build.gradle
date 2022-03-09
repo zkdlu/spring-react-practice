@@ -1,4 +1,3 @@
 dependencies {
-    implementation project(':components:module-chatting')
-    implementation project(':components:module-auth')
+    implementation project(':components:module-todos')
 }

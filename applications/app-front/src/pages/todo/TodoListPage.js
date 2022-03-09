@@ -2,6 +2,7 @@ import { Component } from "react";
 import Form from "./components/Form";
 import TodoItemList from "./components/TodoItemList";
 import TodoListTemplate from "./components/TodoListTemplate";
+import api from '../../api'
 
 class TodoListPage extends Component {
     id = 0
@@ -9,7 +10,24 @@ class TodoListPage extends Component {
         input: '',
         todos: [
           
-        ]
+        ],
+        fail: false
+    }
+
+    async componentDidMount() {
+        try {
+            const fetchedTodos = await api.get('todos');
+            this.setState({
+                todos: fetchedTodos,
+                fail: false
+            });
+
+            console.log(fetchedTodos);
+        } catch (err) {
+            this.setState({
+                fail: true
+            })
+        }
     }
 
     handleChange = (e) => {
@@ -24,8 +42,8 @@ class TodoListPage extends Component {
             input: '',
             todos: todos.concat({
                 id: this.id++,
-                text: input,
-                checked: false
+                content: input,
+                complete: false
             })
         });
     }
@@ -43,7 +61,7 @@ class TodoListPage extends Component {
 
         todos[index] = {
             ...selectedTodo,
-            checked: !selectedTodo.checked
+            complete: !selectedTodo.complete
         };
 
         this.setState({

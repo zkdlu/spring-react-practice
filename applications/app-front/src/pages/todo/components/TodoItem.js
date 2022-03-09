@@ -3,10 +3,10 @@ import './TodoItem.css'
 
 class TodoItem extends Component {
     shouldComponentUpdate(nextProps, nextState) {
-        return this.props.checked !== nextProps.checked;
+        return this.props.complete !== nextProps.complete;
     }
     render() {
-        const { text, checked, id, onToggle, onRemove } = this.props;
+        const { content, complete, id, onToggle, onRemove } = this.props;
 
         return (
             <div className="todo-item" onClick={() => onToggle(id)}>
@@ -15,11 +15,11 @@ class TodoItem extends Component {
                     onRemove(id);
                 }}>&times;
                 </div>
-                <div className={`todo-text ${checked && 'checked'}`}>
-                    <div>{text}</div>
+                <div className={`todo-text ${complete && 'complete'}`}>
+                    <div>{content}</div>
                 </div>
                 {
-                    checked && (<div className="check-mark">✓</div>)
+                    complete && (<div className="check-mark">✓</div>)
                 }
             </div>
         );

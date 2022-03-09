@@ -144,3 +144,4 @@ Temporary Items
 /.idea/
 
 application-auth.yml
+/applications/app-front/package-lock.json

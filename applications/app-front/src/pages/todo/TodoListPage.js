@@ -4,9 +4,7 @@ import TodoItemList from "./components/TodoItemList";
 import TodoListTemplate from "./components/TodoListTemplate";
 
 class TodoListPage extends Component {
-
     id = 0
-
     state = {
         input: '',
         todos: [

@@ -13,4 +13,8 @@ public class Todo {
         this.content = content;
         this.complete = complete;
     }
+
+    public void update(boolean complete) {
+        this.complete = complete;
+    }
 }

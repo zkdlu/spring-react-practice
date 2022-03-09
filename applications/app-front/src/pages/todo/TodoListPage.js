@@ -9,12 +9,16 @@ class TodoListPage extends Component {
     state = {
         input: '',
         todos: [
-          
+
         ],
         fail: false
     }
 
     async componentDidMount() {
+        await this.fetchTodos();
+    }
+
+    async fetchTodos() {
         try {
             const fetchedTodos = await api.get('todos');
             this.setState({
@@ -25,6 +29,7 @@ class TodoListPage extends Component {
             console.log(fetchedTodos);
         } catch (err) {
             this.setState({
+                todos: [],
                 fail: true
             })
         }
@@ -37,14 +42,14 @@ class TodoListPage extends Component {
     }
 
     handleCreate = () => {
-        const { input, todos } = this.state;
+        const { input } = this.state;
+
+        api.post('todos', {
+            content: input
+        }).then(() => this.fetchTodos());
+
         this.setState({
             input: '',
-            todos: todos.concat({
-                id: this.id++,
-                content: input,
-                complete: false
-            })
         });
     }
 
@@ -56,24 +61,16 @@ class TodoListPage extends Component {
 
     handleToggle = (id) => {
         const { todos } = this.state;
-        const index = todos.findIndex(todo => todo.id === id);
-        const selectedTodo = todos[index];
+        const selectedTodo = todos.find(todo => todo.id === id);
 
-        todos[index] = {
-            ...selectedTodo,
+        api.patch(`todos/${id}`, {
             complete: !selectedTodo.complete
-        };
-
-        this.setState({
-            todos: todos
-        });
+        }).then(() => this.fetchTodos());
     }
 
     handleRemove = (id) => {
-        const { todos } = this.state;
-        this.setState({
-            todos: todos.filter(todo => todo.id !== id)
-        });
+        api.delete(`todos/${id}`)
+            .then(() => this.fetchTodos());
     }
 
     render() {
@@ -93,7 +90,7 @@ class TodoListPage extends Component {
                     onChange={handleChange}
                     onCreate={handleCreate} />
             )}>
-                <TodoItemList todos={todos} onToggle={handleToggle} onRemove={handleRemove}/>
+                <TodoItemList todos={todos} onToggle={handleToggle} onRemove={handleRemove} />
             </TodoListTemplate>
         )
     }

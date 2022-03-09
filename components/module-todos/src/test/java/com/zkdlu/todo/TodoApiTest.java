@@ -44,7 +44,7 @@ class TodoApiTest {
     @Test
     void getTodos_returnsTodos() throws Exception {
         given(spyTodoService.getTodos()).willReturn(List.of(
-                new Todo(1, "content", true)
+                new Todo(1L, "content", true)
         ));
 
         mockMvc.perform(get("/todos"))

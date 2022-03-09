@@ -6,4 +6,4 @@ spring:
     name: back
   profiles:
     include:
-      - auth
+      - todo

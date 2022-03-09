@@ -1,41 +1,41 @@
 package com.zkdlu.todo;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class TodoService {
-    private static long id = 1;
-    private static final List<Todo> todoRepository = new ArrayList<>();
+    private final TodoRepository todoRepository;
 
+    @Transactional
     public void createTodo(TodoRequest todoRequest) {
-        todoRepository.add(
-                new Todo(id++, todoRequest.getContent(), false)
+        todoRepository.save(
+                new Todo(todoRequest.getContent(), false)
         );
     }
 
+    @Transactional(readOnly = true)
     public List<Todo> getTodos() {
-        return todoRepository;
+        return todoRepository.findAll();
     }
 
+    @Transactional
     public void updateTodo(Long id, boolean complete) {
-        Todo findTodo = getTodo(id);
+        Todo findTodo = todoRepository.findById(id)
+                .orElseThrow(IllegalArgumentException::new);
 
         findTodo.update(complete);
     }
 
+    @Transactional
     public void deleteTodo(Long id) {
-        Todo findTodo = getTodo(id);
-
-        todoRepository.remove(findTodo);
-    }
-
-    private Todo getTodo(Long id) {
-        Todo findTodo = todoRepository.stream().filter(todo -> todo.getId() == id)
-                .findFirst()
+        Todo findTodo = todoRepository.findById(id)
                 .orElseThrow(IllegalArgumentException::new);
-        return findTodo;
+
+        todoRepository.delete(findTodo);
     }
 }

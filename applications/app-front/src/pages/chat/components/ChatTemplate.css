@@ -4,9 +4,10 @@
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     margin: 0 auto;
     margin-top: 4rem;
+    height: 80%; 
 }
 
-.chat-template .title {
+.chat-template .title-area {
     padding: 2rem;
     font-size: 2.5rem;
     text-align: center;
@@ -15,12 +16,15 @@
     color: white;
 }
 
-.chat-template .form-wrapper {
-    padding: 1rem;
-    border-bottom: 1px solid black;
+.chat-area {
+    height: 75%;
+    overflow: auto;
 }
 
-.chat-template .todos-wrapper {
+.chat-area .chat-wrapper {
     padding: 1rem;
-    min-height: 5rem;
+}
+
+.chat-template .form-wrapper {
+    padding: 1rem;
 }

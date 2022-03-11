@@ -1,9 +1,9 @@
 .header a:link {
     color: black;
     text-decoration: none;
+    padding: 8px;
 }
 
 .header a:hover {
     font-size: 36px;
-
 }

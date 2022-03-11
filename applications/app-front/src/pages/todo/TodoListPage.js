@@ -88,7 +88,7 @@ class TodoListPage extends Component {
                 <Form value={input}
                     onKeyPress={handleKeyPress}
                     onChange={handleChange}
-                    onCreate={handleCreate} />
+                    onClick={handleCreate} />
             )}>
                 <TodoItemList todos={todos} onToggle={handleToggle} onRemove={handleRemove} />
             </TodoListTemplate>

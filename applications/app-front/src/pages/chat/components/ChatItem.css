@@ -1,0 +1,22 @@
+.chat-item-enter .sender {
+    font-size: 14px;
+    text-align: center;
+}
+
+.chat-item-talk {
+    padding: 1rem;
+}
+
+.chat-item-talk:hover {
+    background: lightgrey;
+}
+
+.chat-item-talk .sender {
+    flex: 1;
+    font-size: 14px;
+}
+
+.chat-item-talk .msg {
+    flex: 1;
+    font-size: 24px;
+}

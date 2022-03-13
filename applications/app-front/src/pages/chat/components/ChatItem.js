@@ -29,7 +29,7 @@ class ChatItem extends Component {
     render() {
         const { type, sender, msg } = this.props;
 
-        if (type === 'enter') {
+        if (type === 'ENTER') {
             return this.enterMessage(sender);
         }
 

@@ -4,12 +4,12 @@ import ChatItem from "./ChatItem";
 class ChatList extends Component {
     render() {
         const { chats } = this.props;
-        const chatList = chats.map(({ sender, type, msg }, index) => (
+        const chatList = chats.map(({ sender, type, data }, index) => (
             <ChatItem
                 key={index}
                 sender={sender}
                 type={type}
-                msg={msg}
+                msg={data}
             />)
         )
 

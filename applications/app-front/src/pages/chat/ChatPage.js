@@ -1,37 +1,58 @@
 import { Component } from "react";
+import SockJS from "sockjs-client";
+import Stomp from "stompjs";
 import Form from "../../components/Form";
 import ChatList from "./components/ChatList";
 import ChatTempplate from './components/ChatTemplate'
 
 class ChatPage extends Component {
     state = {
+        client: null,
         input: '',
-        chats: [
-            {
-                sender: 'sender1',
-                type: 'talk',
-                msg: 'msg1',
-            },
-            {
-                sender: 'sender2',
-                type: 'enter',
-                msg: '',
-            }
-        ]
+        chats: []
+    }
+
+    componentDidMount() {
+        const sock = new SockJS('http://localhost:8080/ws-stomp');
+        const client = Stomp.over(sock);
+
+        client.connect({}, () => {
+            client.subscribe("/sub/chat", (message) => {
+                const {chats} = this.state;
+                const body = JSON.parse(message.body);
+                const chat = {
+                    sender: body.sender,
+                    type: body.type,
+                    data: body.data
+                }
+
+                this.setState({
+                    chats: [...chats, chat]
+                })
+            });
+
+            client.send("/pub/chat", {}, JSON.stringify({
+                type: 'ENTER',
+                sender: 'sender1'
+            }));
+        });
+
+        this.setState({
+            client: client
+        });
     }
 
     handleSend = () => {
-        const { input, chats } = this.state;
+        const { input, client } = this.state;
 
-        const chat = {
+        client.send("/pub/chat", {}, JSON.stringify({
+            type: 'TALK',
             sender: 'sender1',
-            type: 'talk',
-            msg: input
-        }
+            data: input
+        }));
 
         this.setState({
             input: '',
-            chats: [...chats, chat]
         })
     }
 
@@ -49,7 +70,7 @@ class ChatPage extends Component {
 
     render() {
         const { input, chats } = this.state;
-        const { 
+        const {
             handleSend,
             handleChange,
             handleKeyPress } = this;

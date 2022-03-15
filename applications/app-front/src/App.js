@@ -5,6 +5,7 @@ import ChatPage from './pages/chat/ChatPage';
 import Home from './pages/home/Home';
 import TodoListPage from './pages/todo/TodoListPage';
 import './App.css'
+import MarketPage from './pages/market/MarketPage';
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
           <Route path='/' element={<Home />} />
           <Route path='/todo' element={<TodoListPage />} />
           <Route path='/chat' element={<ChatPage />} />
+          <Route path='/market' element={<MarketPage />} />
         </Routes>
       </div>
     )

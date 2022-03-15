@@ -6,4 +6,5 @@ include ':components:module-cloud-service-discovery'
 include ':components:module-chatting'
 include ':components:module-auth'
 include ':components:module-todos'
+include ':components:module-market'
 

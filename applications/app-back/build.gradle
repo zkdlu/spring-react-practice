@@ -1,4 +1,5 @@
 dependencies {
     implementation project(':components:module-todos')
     implementation project(':components:module-chatting')
+    implementation project(':components:module-market')
 }

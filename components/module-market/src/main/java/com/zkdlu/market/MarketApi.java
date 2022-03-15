@@ -7,12 +7,14 @@ import java.util.List;
 
 @RestController
 public class MarketApi {
+    private final MarketService marketService;
+
+    public MarketApi(MarketService marketService) {
+        this.marketService = marketService;
+    }
 
     @GetMapping("products")
     public List<Product> getProducts() {
-        Product product = new Product(1, "name", 1, 1);
-        return List.of(
-                product
-        );
+        return marketService.getProducts();
     }
 }

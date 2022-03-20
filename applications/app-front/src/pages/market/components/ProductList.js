@@ -11,6 +11,7 @@ class ProductList extends Component {
                 name={name}
                 price={price}
                 stock={stock}
+                id={id}
             />
         ));
 

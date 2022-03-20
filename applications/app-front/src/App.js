@@ -6,6 +6,7 @@ import Home from './pages/home/Home';
 import TodoListPage from './pages/todo/TodoListPage';
 import './App.css'
 import MarketPage from './pages/market/MarketPage';
+import ProductPage from './pages/market/ProductPage';
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
           <Route path='/todo' element={<TodoListPage />} />
           <Route path='/chat' element={<ChatPage />} />
           <Route path='/market' element={<MarketPage />} />
+          <Route path='/market/:id' element={<ProductPage />} />
         </Routes>
       </div>
     )

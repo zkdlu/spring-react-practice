@@ -14,8 +14,6 @@ class MarketPage extends Component {
 
     async fetchProducts() {
         const fetchedProducts = await api.get('products');
-
-        console.log(fetchedProducts);
         this.setState({
             products: [...fetchedProducts]
         })

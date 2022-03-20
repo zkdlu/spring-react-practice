@@ -1,9 +1,11 @@
+import './MarketTemplate.css'
+
 const MarketTemplate = ({children}) => {
     return (
-        <main>
-            <div>
+        <main className="market-template">
+            <section className="market-wrapper">
                 {children}
-            </div>
+            </section>
         </main>
     )
 }

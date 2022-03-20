@@ -1,5 +1,6 @@
 import { Component } from "react";
 import ProductItem from "./ProductItem";
+import './ProductList.css'
 
 class ProductList extends Component {
     render() {
@@ -14,7 +15,7 @@ class ProductList extends Component {
         ));
 
         return (
-            <div>
+            <div className="product-list">
                 {productList}
             </div>
         )

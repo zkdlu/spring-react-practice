@@ -1,30 +1,25 @@
 import { Component } from "react";
+import { Link } from "react-router-dom";
 import './ProductItem.css'
 
 class ProductItem extends Component {
-    goToProductPage = () => {
-        const { id } = this.props;
-        window.location.href = `/market/${id}`;
-    }
-
     render() {
-        const { name, price, stock } = this.props;
-        const {
-            goToProductPage
-        } = this;
+        const { id, name, price, stock } = this.props;
 
         return (
-            <div className="product" onClick={goToProductPage}>
-                <div>
-                    {name}
+            <Link to={`/market/${id}`}>
+                <div className="product">
+                    <div>
+                        {name}
+                    </div>
+                    <section>
+                        {price}
+                    </section>
+                    <section>
+                        {stock}
+                    </section>
                 </div>
-                <section>
-                    {price}
-                </section>
-                <section>
-                    {stock}
-                </section>
-            </div>
+            </Link>
         )
     }
 }

@@ -14,7 +14,7 @@ class App extends Component {
       <div className='main'>
         <Header />
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/'  element={<Home />} />
           <Route path='/todo' element={<TodoListPage />} />
           <Route path='/chat' element={<ChatPage />} />
           <Route path='/market' element={<MarketPage />} />

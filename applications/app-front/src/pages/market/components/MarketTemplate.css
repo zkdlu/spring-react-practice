@@ -6,6 +6,12 @@
     margin-top: 4rem;
 }
 
+.market-template .market-title {
+    padding: 1rem;
+    font-size: 24px;
+    font-weight: bold;
+}
+
 .market-template .market-wrapper {
     padding: 1rem;
     min-height: 5rem;

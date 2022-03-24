@@ -1,0 +1,22 @@
+.product-order {
+    height: 100%;
+}
+
+.product-order-title {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.prodcut-order-discount {
+    color: red;
+}
+
+.product-order-amount {
+    font-size: 28px;
+    font-weight: bold;
+    padding: 1rem;
+}
+.product-order-price {
+    color: gray;
+    text-decoration: line-through;
+}

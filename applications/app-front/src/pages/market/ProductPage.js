@@ -2,11 +2,16 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from '../../api'
 import ProductDetailItem from "./components/ProductDetailItem";
+import ProductOrder from "./components/ProductOrder";
 import ProductTemplate from "./components/ProductTemplate";
 
 async function fetchProduct(id) {
     const product = await api.get(`products/${id}`);
     return product;
+}
+
+function handleOrder() {
+    alert('주문');
 }
 
 const ProductPage = () => {
@@ -21,9 +26,7 @@ const ProductPage = () => {
     return (
         <ProductTemplate>
             <ProductDetailItem product={product} />
-            <div>
-                구매영역
-            </div>
+            <ProductOrder product={product} onClick={handleOrder}/>
         </ProductTemplate>
     )
 }

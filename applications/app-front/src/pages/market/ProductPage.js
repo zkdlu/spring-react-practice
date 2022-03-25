@@ -10,8 +10,10 @@ async function fetchProduct(id) {
     return product;
 }
 
-function handleOrder() {
-    alert('주문');
+async function handleOrder(product) {
+    const response = await api.post(`order/${product.id}`);
+    
+    console.log(response);
 }
 
 const ProductPage = () => {

@@ -23,7 +23,7 @@ class ProductOrder extends Component {
                 <section>
                     {product.stock}개 남음
                 </section>
-                <OrderButton onClick={onClick}/>
+                <OrderButton product={product} onClick={onClick}/>
             </div>
         )
     }

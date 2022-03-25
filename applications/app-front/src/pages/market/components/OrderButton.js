@@ -5,10 +5,8 @@ class OrderButton extends Component {
     render() {
         const { product, onClick } = this.props;
 
-        console.log(product);
-
         return (
-            <div className="order-button" onClick={onClick}>
+            <div className="order-button" onClick={() => onClick(product)}>
                 주문하기
             </div>
         )

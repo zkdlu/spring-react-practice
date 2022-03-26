@@ -6,7 +6,7 @@ class LottoItemList extends Component {
     render() {
         const { lottos } = this.props;
         const lottoList = lottos.map(
-            (number, index) => (
+            ({number}, index) => (
                 <LottoItem
                     number={number}
                     key={index}

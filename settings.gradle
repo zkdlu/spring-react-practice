@@ -7,4 +7,5 @@ include ':components:module-chatting'
 include ':components:module-auth'
 include ':components:module-todos'
 include ':components:module-market'
+include ':components:module-lotto'
 

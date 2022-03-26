@@ -1,0 +1,13 @@
+.lotto-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    font-size: 20px;
+    font-weight: 900;
+    text-shadow: 3px 0 0 rgba(white, .5);
+    background-color: #22b8cf;
+    margin: 4px;
+}

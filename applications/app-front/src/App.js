@@ -8,6 +8,7 @@ import './App.css'
 import MarketPage from './pages/market/MarketPage';
 import ProductPage from './pages/market/ProductPage';
 import PaymentPage from './pages/market/PaymentPage';
+import LottoPage from './pages/lotto/LottoPage';
 
 class App extends Component {
   render() {
@@ -21,6 +22,7 @@ class App extends Component {
           <Route path='/market' element={<MarketPage />} />
           <Route path='/market/:id' element={<ProductPage />} />
           <Route path='/payment/:id' element={<PaymentPage />} />
+          <Route path='/lotto' element={<LottoPage />} />
         </Routes>
       </div>
     )

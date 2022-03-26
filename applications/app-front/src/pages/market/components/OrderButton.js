@@ -1,4 +1,5 @@
 import { Component } from "react";
+import Button from "../../../components/Button";
 import './OrderButton.css'
 
 class OrderButton extends Component {
@@ -6,9 +7,7 @@ class OrderButton extends Component {
         const { product, onClick } = this.props;
 
         return (
-            <div className="order-button" onClick={() => onClick(product)}>
-                주문하기
-            </div>
+            <Button msg='주문하기' onClick={() => onClick(product)}/>
         )
     }
 }

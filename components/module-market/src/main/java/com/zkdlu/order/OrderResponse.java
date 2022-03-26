@@ -6,6 +6,6 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class OrderResponse {
-    private final String orderId;
+    private final Long orderId;
     private final Long productNo;
 }

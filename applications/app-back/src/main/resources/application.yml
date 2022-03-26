@@ -8,3 +8,13 @@ spring:
     include:
       - todo
       - market
+
+
+feign:
+  circuitbreaker:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 1000

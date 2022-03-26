@@ -36,10 +36,10 @@ class OrderApiTest {
 
     @Test
     void placeOrder_returnsOrderResponse() throws Exception {
-        given(spyOrderSerivce.placeOrder(any())).willReturn(new OrderResponse("", 1L));
+        given(spyOrderSerivce.placeOrder(any())).willReturn(new OrderResponse(1L, 1L));
 
         mockMvc.perform(post("/order/1"))
-                .andExpect(jsonPath("$.orderId", equalTo("")))
+                .andExpect(jsonPath("$.orderId", equalTo(1)))
                 .andExpect(jsonPath("$.productNo", equalTo(1)))
         ;
     }

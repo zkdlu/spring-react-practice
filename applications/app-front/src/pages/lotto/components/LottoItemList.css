@@ -1,7 +1,7 @@
 .lotto-list {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 100px 100px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 100px;
     grid-auto-rows: 100px;
     margin: 1rem;
 }

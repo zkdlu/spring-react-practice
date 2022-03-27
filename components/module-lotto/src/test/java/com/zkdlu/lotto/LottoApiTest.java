@@ -16,7 +16,7 @@ class LottoApiTest {
 
     @BeforeEach
     void setUp() {
-        mockMvc = MockMvcBuilders.standaloneSetup(new LottoApi()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(new LottoApi(new LottoGame())).build();
     }
 
     @Test

@@ -1,10 +1,8 @@
 import './LottoItem.css'
 
-const LottoItem = ({number}) => {
+const LottoItem = ({ number }) => {
     return (
-        <div className='lotto-item'>
-            {number}
-        </div>
+        <div className='lotto-item'>{number}</div>
     );
 }
 

@@ -11,9 +11,14 @@ class LottoPage extends Component {
 
     async fetchLotto() {
         const fetchedLottos = await api.get('lotto');
+        console.log(fetchedLottos);
         this.setState({
             lottos: [...fetchedLottos.lottoNumbers]
         });
+    }
+
+    handleClick = async () => {
+        await this.fetchLotto();
     }
 
     async componentDidMount() {
@@ -25,7 +30,7 @@ class LottoPage extends Component {
 
         return (
             <LottoTemplate form={(
-                <Button msg='생성' />
+                <Button msg='생성' onClick={this.handleClick} />
             )}>
                 <LottoItemList lottos={lottos} />
             </LottoTemplate>

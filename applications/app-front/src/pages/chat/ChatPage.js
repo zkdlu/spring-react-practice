@@ -1,4 +1,5 @@
 import { Component } from "react";
+import Modal from "react-modal/lib/components/Modal";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import Form from "../../components/Form";
@@ -9,16 +10,19 @@ class ChatPage extends Component {
     state = {
         client: null,
         input: '',
-        chats: []
+        chats: [],
+        isOpen: true,
+        sender: '',
     }
 
-    componentDidMount() {
+    connect = () => {
+        const { sender } = this.state;
         const sock = new SockJS('http://localhost:8080/ws-stomp');
         const client = Stomp.over(sock);
 
         client.connect({}, () => {
             client.subscribe("/sub/chat", (message) => {
-                const {chats} = this.state;
+                const { chats } = this.state;
                 const body = JSON.parse(message.body);
                 const chat = {
                     sender: body.sender,
@@ -33,7 +37,7 @@ class ChatPage extends Component {
 
             client.send("/pub/chat", {}, JSON.stringify({
                 type: 'ENTER',
-                sender: 'sender1'
+                sender,
             }));
         });
 
@@ -43,11 +47,11 @@ class ChatPage extends Component {
     }
 
     handleSend = () => {
-        const { input, client } = this.state;
+        const { input, client, sender } = this.state;
 
         client.send("/pub/chat", {}, JSON.stringify({
             type: 'TALK',
-            sender: 'sender1',
+            sender,
             data: input
         }));
 
@@ -68,12 +72,28 @@ class ChatPage extends Component {
         })
     }
 
+    setModalIsOpen = (open) => {
+        this.setState({
+            isOpen: open
+        })
+
+        this.connect();
+    }
+
+    inputSender = (e) => {
+        this.setState({
+            sender: e.target.value
+        })
+    }
+
     render() {
-        const { input, chats } = this.state;
+        const { input, chats, isOpen, sender } = this.state;
         const {
             handleSend,
             handleChange,
-            handleKeyPress } = this;
+            handleKeyPress,
+            setModalIsOpen,
+            inputSender } = this;
 
         return (
             <ChatTempplate form={(
@@ -83,6 +103,40 @@ class ChatPage extends Component {
                     onKeyPress={handleKeyPress}
                     onClick={handleSend} />
             )}>
+                <Modal style={{
+                    overlay: {
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        backgroundColor: 'rgba(0, 0, 0, 0.75)'
+                    },
+                    content: {
+                        borderRadius: '4px',
+                        bottom: 'auto',
+                        minHeight: '10rem',
+                        left: '50%',
+                        padding: '2rem',
+                        position: 'fixed',
+                        right: 'auto',
+                        top: '50%',
+                        transform: 'translate(-50%,-50%)',
+                        minWidth: '20rem',
+                        width: '80%',
+                        maxWidth: '60rem'
+                    }
+                }}
+
+                    isOpen={isOpen}>
+                    <span>
+                        이름
+                    </span>
+                    <Form msg='확인'
+                        value={sender}
+                        onChange={inputSender}
+                        onClick={() => setModalIsOpen(false)} />
+                </Modal>
                 <ChatList chats={chats} />
             </ChatTempplate>
         )
